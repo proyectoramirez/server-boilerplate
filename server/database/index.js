@@ -16,4 +16,4 @@ function createConnection() {
 // mongoose.connection.on("disconnected", () => logger.info("Connection to database lost"));
 // mongoose.connection.on("reconnected", () => logger.info("Recovered database connection"));
 
-module.exports = { createConnection, db: mongoose };
+module.exports = { createConnection, instance: mongoose };

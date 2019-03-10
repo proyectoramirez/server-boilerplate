@@ -1,6 +1,6 @@
 const express = require("express");
 const config = require("./config");
-const DB = require("./database");
+const db = require("./database");
 
 const isDev = process.env.NODE_ENV !== "production";
 const app = express();
@@ -8,7 +8,7 @@ const app = express();
 loadMiddleware();
 loadRoutes();
 
-DB.createConnection().then(startApp);
+db.createConnection().then(startApp);
 
 //---------------------------------------------------------------
 
