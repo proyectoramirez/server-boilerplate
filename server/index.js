@@ -1,4 +1,5 @@
 const express = require("express");
+const logger = require("./utils/logger");
 const config = require("./config");
 const db = require("./database");
 
@@ -8,7 +9,7 @@ const app = express();
 loadMiddleware();
 loadRoutes();
 
-db.createConnection().then(startApp);
+db.createConnection().then(startApp).catch(err => logger.error(err));;
 
 //---------------------------------------------------------------
 
@@ -26,15 +27,13 @@ function loadRoutes() {
 }
 
 function startApp() {
-    const logger = require("./utils/logger");
-
     const host = config.host;
     const port = config.port;
 
     // Start your app.
     app.listen(port, host, async err => {
         if (err) {
-            return logger.error(err.message);
+            return logger.error(err);
         }
         logger.appStarted(port, host);
     });

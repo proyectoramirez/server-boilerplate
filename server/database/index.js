@@ -8,7 +8,6 @@ function createConnection() {
             logger.timestamp();
             logger.info("Database connected\n");
         })
-        .catch(err => logger.error(err.message));
 }
 
 // mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
