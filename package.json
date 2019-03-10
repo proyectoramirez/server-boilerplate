@@ -1,0 +1,25 @@
+{
+  "name": "jose-test",
+  "version": "1.0.0",
+  "description": "A test for me",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+  },
+  "author": "Jose Ramirez",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node server",
+    "start:production": "npm run test && npm run build && npm run start:prod",
+    "start:prod": "cross-env NODE_ENV=production node server"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "express": "^4.16.4",
+    "ip": "^1.1.5",
+    "minimist": "^1.2.0",
+    "mongoose": "^5.4.17"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}
