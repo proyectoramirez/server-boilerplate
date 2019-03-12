@@ -82,10 +82,10 @@ function initGit(callback) {
 }
 
 /**
- * Deletes a file in the current directory
+ * Deletes the current directory
  */
-function deleteFileInCurrentDir(file, callback) {
-    fs.unlink(path.join(__dirname, file), callback);
+function deleteCurrentDir(callback) {
+    fs.unlink(__dirname, callback);
 }
 
 /**
@@ -131,7 +131,7 @@ function installDepsCallback(error) {
         process.exit(1);
     }
 
-    deleteFileInCurrentDir('setup.js', () => {
+    deleteCurrentDir(() => {
         if (clearRepo) {
             interval = animateProgress('Initialising new repository');
             process.stdout.write('Initialising new repository');
