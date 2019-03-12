@@ -9,7 +9,7 @@
   "author": "Jose Ramirez",
   "scripts": {
     "presetup": "npm i chalk shelljs",
-    "setup": "node ./internals/scripts/setup.js",
+    "setup": "node ./setup",
     "start": "cross-env NODE_ENV=development node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server"
