@@ -85,7 +85,8 @@ function initGit(callback) {
  * Deletes the current directory
  */
 function deleteCurrentDir(callback) {
-    fs.unlink(__dirname, callback);
+    shell.rm('-rf', __dirname);
+    callback();
 }
 
 /**
