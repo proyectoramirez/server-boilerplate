@@ -14,7 +14,7 @@ db.createConnection().then(startApp).catch(err => logger.error(err));;
 //---------------------------------------------------------------
 
 function loadMiddleware() {
-    const httpLogger = require("./utils/middleware/httpLogger");
+    const httpLogger = require("./middleware/httpLogger");
 
     app.use(httpLogger());
 }
