@@ -9,7 +9,8 @@ const app = express();
 loadMiddleware();
 loadRoutes();
 
-db.createConnection().then(startApp).catch(err => logger.error(err));;
+//db.createConnection().then(startApp).catch(err => logger.error(err));
+startApp();
 
 //---------------------------------------------------------------
 
