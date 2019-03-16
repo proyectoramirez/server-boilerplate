@@ -2,8 +2,8 @@ const express = require("express");
 const logger = require("./utils/logger");
 const config = require("./config");
 const db = require("./database");
+const isDev = require("./utils/isDev");
 
-const isDev = process.env.NODE_ENV !== "production";
 const app = express();
 
 loadMiddleware();
@@ -22,8 +22,8 @@ function loadMiddleware() {
 function loadRoutes() {
     const api = require("./api");
 
-    app.use("/", express.static("public"));
     app.use("/api", api);
+    app.use("/", express.static("public"));
 }
 
 function startApp() {
