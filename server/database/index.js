@@ -7,7 +7,7 @@ function createConnection() {
         .then(() => {
             logger.timestamp();
             logger.info("Database connected\n");
-        })
+        }).catch(err => logger.error(err + "\n"));
 }
 
 // mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));

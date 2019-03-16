@@ -2,30 +2,15 @@ const express = require("express");
 const logger = require("./utils/logger");
 const config = require("./config");
 const db = require("./database");
-const isDev = require("./utils/isDev");
+const middleware = require("./middleware");
+const routes = require("./routes");
 
 const app = express();
 
-loadMiddleware();
-loadRoutes();
+app.use(middleware);
+app.use(routes);
 
-//db.createConnection().then(startApp).catch(err => logger.error(err));
-startApp();
-
-//---------------------------------------------------------------
-
-function loadMiddleware() {
-    const httpLogger = require("./middleware/httpLogger");
-
-    app.use(httpLogger());
-}
-
-function loadRoutes() {
-    const api = require("./api");
-
-    app.use("/api", api);
-    app.use("/", express.static("public"));
-}
+db.createConnection().then(startApp);
 
 function startApp() {
     const host = config.host;
