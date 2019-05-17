@@ -1,3 +1,6 @@
+//Sets up require aliases
+require('module-alias/register');
+
 const express = require("express");
 const logger = require("./utils/logger");
 const config = require("./config");
