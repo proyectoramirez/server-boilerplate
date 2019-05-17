@@ -1,5 +1,5 @@
 const express = require("express");
-const getDirectories = require("../../utils/getDirectories");
+const getDirectories = require("@/utils/getDirectories");
 
 const router = express.Router();
 

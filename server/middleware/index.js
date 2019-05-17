@@ -1,5 +1,5 @@
 const express = require("express");
-const isDev = require("../utils/isDev");
+const { isDev } = require("@/utils/env");
 
 const router = express.Router();
 
