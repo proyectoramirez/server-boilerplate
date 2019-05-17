@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-const config = require("../config");
-const logger = require("../utils/logger");
+const config = require("@/config");
+const logger = require("@/utils/logger");
 
 function createConnection() {
-    return mongoose.connect(`mongodb://${config.db_server}/${config.db_name}`, { useNewUrlParser: true })
+    return mongoose.connect(config.connectionStrings.db, { useNewUrlParser: true })
         .then(() => {
             logger.timestamp();
             logger.info("Database connected\n");
