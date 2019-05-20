@@ -1,9 +1,6 @@
-const express = require("express");
-const api = require("./api");
-
+const routes = require("./routes");
 const router = express.Router();
 
-router.use("/api", api);
-router.use("/", express.static("public"));
+routes.forEach(route => router.use(...route));
 
 module.exports = router;
