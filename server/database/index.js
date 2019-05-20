@@ -6,8 +6,12 @@ function createConnection() {
     return mongoose.connect(config.connectionStrings.db, { useNewUrlParser: true })
         .then(() => {
             logger.timestamp();
-            logger.info("Database connected\n");
-        }).catch(err => logger.error(err + "\n"));
+            logger.info();
+        }).catch(err => {
+            logger.timestamp();
+            logger.error(err + "\n");
+            throw err;
+        });
 }
 
 // mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
@@ -15,4 +19,4 @@ function createConnection() {
 // mongoose.connection.on("disconnected", () => logger.info("Connection to database lost"));
 // mongoose.connection.on("reconnected", () => logger.info("Recovered database connection"));
 
-module.exports = { createConnection, instance: mongoose };
+module.exports = { createConnection, connection: mongoose };
