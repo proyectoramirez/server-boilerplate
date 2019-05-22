@@ -2,12 +2,14 @@ const mongoose = require("mongoose");
 const config = require("@/config");
 const logger = require("@/utils/logger");
 
-function createConnection() {
+function setupDB() {
     return mongoose.connect(config.connectionStrings.db, { useNewUrlParser: true })
         .then(() => {
+            console.log();
             logger.timestamp();
             logger.info();
         }).catch(err => {
+            console.log();
             logger.timestamp();
             logger.error(err + "\n");
             throw err;
@@ -19,4 +21,4 @@ function createConnection() {
 // mongoose.connection.on("disconnected", () => logger.info("Connection to database lost"));
 // mongoose.connection.on("reconnected", () => logger.info("Recovered database connection"));
 
-module.exports = { createConnection, connection: mongoose };
+module.exports = setupDB;
