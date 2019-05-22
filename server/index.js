@@ -3,17 +3,17 @@ require('module-alias/register');
 
 const express = require("express");
 const config = require("./config");
-const db = require("./database");
+const setupDB = require("./database");
 const middleware = require("./middleware");
-const routes = require("./routes");
+const routing = require("./routing");
 const logger = require("./utils/logger");
 
 const app = express();
 
 app.use(middleware);
-app.use(routes);
+app.use(routing);
 
-db.createConnection().finally(startServer);
+setupDB().catch(() => {}).finally(startServer);
 
 function startServer() {
     const host = config.host;
