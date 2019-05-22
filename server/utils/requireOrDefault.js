@@ -1,7 +1,7 @@
 module.exports = (path, def) => {
     try {
         return require(path);
-    } catch {
+    } catch (e) {
         return def;
     }
 }
