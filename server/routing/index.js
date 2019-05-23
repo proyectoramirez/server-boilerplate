@@ -1,8 +1,11 @@
 const express = require("express");
 const loadPathsIntoRouter = require("@/utils/loadPathsIntoRouter");
-const routes = require("./routes");
+const api = require("./api");
 
-const router = express.Router();
-loadPathsIntoRouter(router, routes);
+const routes = [
+    ["/api", api],
+    ["/", express.static("public")]
+];
 
-module.exports = router;
+
+module.exports = loadPathsIntoRouter(routes);
