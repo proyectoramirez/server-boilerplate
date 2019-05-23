@@ -4,5 +4,4 @@ const routes = [
 
 ];
 
-
 module.exports = loadPathsIntoRouter(routes);
