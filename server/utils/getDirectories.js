@@ -1,8 +1,10 @@
-const { lstatSync, readdirSync } = require("fs");
-const { join } = require("path");
+import { lstatSync, readdirSync } from 'fs';
+import { join } from 'path';
 
 function getDirectories(source) {
-    return readdirSync(source).filter(item => lstatSync(join(source, item)).isDirectory())
+  return readdirSync(source).filter((item) =>
+    lstatSync(join(source, item)).isDirectory()
+  );
 }
 
-module.exports = getDirectories;
+export default getDirectories;

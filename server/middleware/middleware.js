@@ -1,6 +1,3 @@
-const express = require("express");
+import express from 'express';
 
-module.exports = [
-    express.json(),
-    express.urlencoded()
-];
+export default [express.json(), express.urlencoded()];

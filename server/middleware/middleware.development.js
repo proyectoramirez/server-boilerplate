@@ -1,5 +1,3 @@
-const httpLogger = require("./httpLogger");
+import httpLogger from './httpLogger/index.js';
 
-module.exports = [
-    httpLogger()
-];
+export default [httpLogger()];

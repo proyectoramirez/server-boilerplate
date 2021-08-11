@@ -1,7 +1,5 @@
-const loadPathsIntoRouter = require("@/utils/loadPathsIntoRouter");
+import loadPathsIntoRouter from '../../utils/loadPathsIntoRouter.js';
 
-const routes = [
+const routes = [];
 
-];
-
-module.exports = loadPathsIntoRouter(routes);
+export default loadPathsIntoRouter(routes);

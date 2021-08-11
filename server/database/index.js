@@ -1,24 +1,27 @@
-const mongoose = require("mongoose");
-const config = require("@/config");
-const logger = require("@/utils/logger");
+import mongoose from 'mongoose';
+
+import config from '../config/index.js';
+import logger from '../utils/logger.js';
 
 function setupDB() {
-    return mongoose.connect(config.connectionStrings.db, { useNewUrlParser: true })
-        .then(() => {
-            console.log();
-            logger.timestamp();
-            logger.info();
-        }).catch(err => {
-            console.log();
-            logger.timestamp();
-            logger.error(err + "\n");
-            throw err;
-        });
+  return mongoose
+    .connect(config.connectionStrings.db, { useNewUrlParser: true })
+    .then(() => {
+      console.log();
+      logger.timestamp();
+      logger.info();
+    })
+    .catch((err) => {
+      console.log();
+      logger.timestamp();
+      logger.error(`${err}\n`);
+      throw err;
+    });
 }
 
-// mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
-// mongoose.connection.on("connected", () => logger.info("Database connected"));
-// mongoose.connection.on("disconnected", () => logger.info("Connection to database lost"));
-// mongoose.connection.on("reconnected", () => logger.info("Recovered database connection"));
+// Mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
+// Mongoose.connection.on("connected", () => logger.info("Database connected"));
+// Mongoose.connection.on("disconnected", () => logger.info("Connection to database lost"));
+// Mongoose.connection.on("reconnected", () => logger.info("Recovered database connection"));
 
-module.exports = setupDB;
+export default setupDB;

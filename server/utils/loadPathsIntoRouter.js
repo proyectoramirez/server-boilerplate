@@ -1,7 +1,7 @@
-const express = require("express");
+import express from 'express';
 
-module.exports = (routes) => {
-    const router = express.Router();
-    routes.forEach(route => router.use(...route));
-    return router;
-}
+export default (routes) => {
+  const router = express.Router();
+  routes.forEach((route) => router.use(...route));
+  return router;
+};

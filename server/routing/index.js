@@ -1,11 +1,11 @@
-const express = require("express");
-const loadPathsIntoRouter = require("@/utils/loadPathsIntoRouter");
-const api = require("./api");
+import express from 'express';
+
+import loadPathsIntoRouter from '../utils/loadPathsIntoRouter.js';
+import api from './api/index.js';
 
 const routes = [
-    ["/api", api],
-    ["/", express.static("public")]
+  ['/api', api],
+  ['/', express.static('public')],
 ];
 
-
-module.exports = loadPathsIntoRouter(routes);
+export default loadPathsIntoRouter(routes);

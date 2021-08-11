@@ -1,9 +1,13 @@
-const express = require("express");
-const { isDev } = require("@/utils/env");
-const commonMiddleware = require("./middleware");
-const specificMiddleware = require(isDev ? "./middleware.development" : "./middleware.production");
+import express from 'express';
+
+import { isDev } from '../utils/env.js';
+import commonMiddleware from './middleware.js';
+
+const specificMiddleware = await import(
+  isDev ? './middleware.development.js' : './middleware.production.js'
+);
 
 const router = express.Router();
-router.use(commonMiddleware, specificMiddleware);
+router.use(commonMiddleware, specificMiddleware.default);
 
-module.exports = router;
+export default router;

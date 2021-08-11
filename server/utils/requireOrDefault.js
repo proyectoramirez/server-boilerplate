@@ -1,7 +1,8 @@
-module.exports = (path, def) => {
-    try {
-        return require(path);
-    } catch (e) {
-        return def;
-    }
-}
+export default async (path, def) => {
+  try {
+    const module = await import(path);
+    return module.default;
+  } catch {
+    return def;
+  }
+};
