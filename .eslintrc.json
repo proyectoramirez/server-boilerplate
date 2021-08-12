@@ -7,7 +7,6 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "plugins": ["simple-import-sort"],
   "rules": {
     "valid-jsdoc": "off",
     "require-jsdoc": "off",
