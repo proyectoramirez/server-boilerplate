@@ -1,5 +1,4 @@
 import express from 'express';
-
 import loadPathsIntoRouter from '../utils/loadPathsIntoRouter.js';
 import api from './api/index.js';
 

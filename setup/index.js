@@ -1,9 +1,8 @@
 import { exec } from 'child_process';
-import compareVersions from 'compare-versions';
 import fs from 'fs';
 import readline from 'readline';
+import compareVersions from 'compare-versions';
 import shell from 'shelljs';
-
 import addCheckMark from './helpers/checkmark.js';
 import animateProgress from './helpers/progress.js';
 
@@ -32,17 +31,18 @@ cleanRepo(() => {
  * Deletes the .git folder in dir only if cloned from our repo
  */
 function cleanRepo(callback) {
-  fs.access('.git/', fs.constants.F_OK, (err) => {
-    if (err) {
+  fs.access('.git/', fs.constants.F_OK, (error) => {
+    if (error) {
       callback();
-      return;
+      
+return;
     }
 
     process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
     process.stdin.resume();
     process.stdin.on('data', (pData) => {
-      const val = pData.toString().trim();
-      if (val === 'y' || val === 'Y' || val === '') {
+      const value = pData.toString().trim();
+      if (value === 'y' || value === 'Y' || value === '') {
         process.stdout.write('Removing old repository');
         shell.rm('-rf', '.git/');
         addCheckMark(callback);
@@ -88,19 +88,19 @@ function deleteCurrentDir(callback) {
  *
  */
 function installDeps() {
-  exec('node --version', (err, stdout) => {
+  exec('node --version', (error, stdout) => {
     const nodeVersion = stdout.trim();
-    if (err || compareVersions(nodeVersion, '8.10.0') === -1) {
+    if (error || compareVersions(nodeVersion, '8.10.0') === -1) {
       installDepsCallback(
-        err ||
+        error ||
           `[ERROR] You need Node.js v8.10 or above but you have ${nodeVersion}`
       );
     } else {
-      exec('npm --version', (err2, stdout2) => {
+      exec('npm --version', (error2, stdout2) => {
         const npmVersion = stdout2.trim();
-        if (err2 || compareVersions(npmVersion, '5.0.0') === -1) {
+        if (error2 || compareVersions(npmVersion, '5.0.0') === -1) {
           installDepsCallback(
-            err2 ||
+            error2 ||
               `[ERROR] You need npm v5 or above but you have v${npmVersion}`
           );
         } else {

@@ -1,15 +1,14 @@
-import deepFreeze from 'deep-freeze';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-
+import deepFreeze from 'deep-freeze';
 import argv from '../utils/argv.js';
-import { envName } from '../utils/env.js';
+import { envName as environmentName } from '../utils/env.js';
 import requireOrDefault from '../utils/requireOrDefault.js';
 import base from './config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const resolvedPath = path.resolve(__dirname, `./config.${envName}.js`);
+const resolvedPath = path.resolve(__dirname, `./config.${environmentName}.js`);
 
 const overrides = await requireOrDefault(pathToFileURL(resolvedPath).href);
 
