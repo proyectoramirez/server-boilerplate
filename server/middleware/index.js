@@ -1,10 +1,9 @@
 import express from 'express';
-
-import { isDev } from '../utils/env.js';
+import { isDev as isDevelopment } from '../utils/env.js';
 import commonMiddleware from './middleware.js';
 
 const specificMiddleware = await import(
-  isDev ? './middleware.development.js' : './middleware.production.js'
+  isDevelopment ? './middleware.development.js' : './middleware.production.js'
 );
 
 const router = express.Router();

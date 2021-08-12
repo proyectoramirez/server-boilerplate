@@ -1,5 +1,4 @@
 import express from 'express';
-
 import config from './config/index.js';
 import setupDB from './database/index.js';
 import middleware from './middleware/index.js';
@@ -16,13 +15,13 @@ setupDB()
   .finally(startServer);
 
 function startServer() {
-  const {host} = config;
-  const {port} = config;
+  const { host } = config;
+  const { port } = config;
 
   // Start your app.
-  app.listen(port, host, (err) => {
-    if (err) {
-      return logger.error(err);
+  app.listen(port, host, (error) => {
+    if (error) {
+      return logger.error(error);
     }
     logger.appStarted(port, host);
   });

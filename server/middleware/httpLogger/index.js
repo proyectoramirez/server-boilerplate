@@ -1,8 +1,8 @@
-import { isDev } from '../../utils/env.js';
+import { isDev as isDevelopment } from '../../utils/env.js';
 import logger from '../../utils/logger.js';
 
-const logRequest = (req) => {
-  logger.info(`${req.method} to ${req.originalUrl} by ${req.ip}`);
+const logRequest = (request) => {
+  logger.info(`${request.method} to ${request.originalUrl} by ${request.ip}`);
 };
 
 const logResponse = (res) => {
@@ -22,20 +22,19 @@ const logResponse = (res) => {
   }
 };
 
-const logError = (err) => {
-  logger.error(err);
+const logError = (error) => {
+  logger.error(error);
 };
 
-const middleware = (callback) => {
-  return (req, res, next) => {
-    function runCallback(err) {
-      callback(req, res, err);
+const middleware = (callback) => (request, res, next) => {
+    function runCallback(error) {
+      callback(request, res, error);
       cleanupCallback();
     }
 
-    function log(err) {
-      if (err) {
-        logError(err);
+    function log(error) {
+      if (error) {
+        logError(error);
       } else {
         logResponse(res);
       }
@@ -56,9 +55,9 @@ const middleware = (callback) => {
       res.off('error', log);
     }
 
-    if (isDev) {
+    if (isDevelopment) {
       logger.timestamp();
-      logRequest(req);
+      logRequest(request);
       res.on('finish', log);
       res.on('close', log);
       res.on('error', log);
@@ -72,6 +71,5 @@ const middleware = (callback) => {
 
     next();
   };
-};
 
 export default middleware;

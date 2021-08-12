@@ -4,12 +4,12 @@ import ip from 'ip';
 
 const divider = chalk.gray('\n-----------------------------------');
 
-export const info = (msg) => {
-  console.log(chalk.yellow(msg));
+export const info = (message) => {
+  console.log(chalk.yellow(message));
 };
 
-export const error = (err) => {
-  console.error(chalk.red(err));
+export const error = (error_) => {
+  console.error(chalk.red(error_));
 };
 
 export const timestamp = () => {
@@ -28,4 +28,4 @@ ${chalk.blue(`Press ${chalk.italic('CTRL-C')} to stop`)}\n`
   );
 };
 
-export default { info, error, appStarted, timestamp };
+export default { appStarted, error, info, timestamp };

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import config from '../config/index.js';
 import logger from '../utils/logger.js';
 
@@ -11,11 +10,11 @@ function setupDB() {
       logger.timestamp();
       logger.info();
     })
-    .catch((err) => {
+    .catch((error) => {
       console.log();
       logger.timestamp();
-      logger.error(`${err}\n`);
-      throw err;
+      logger.error(`${error}\n`);
+      throw error;
     });
 }
 
