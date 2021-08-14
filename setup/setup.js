@@ -1,146 +1,86 @@
-import { exec } from 'child_process';
-import fs from 'fs';
-import readline from 'readline';
-import compareVersions from 'compare-versions';
-import shell from 'shelljs';
-import addCheckMark from './helpers/checkmark.js';
-import animateProgress from './helpers/progress.js';
+import process from 'process';
+import { genRemoveSetupFolder } from './cleanup.js';
+import { genInstallDependencies } from './dependencies.js';
+import { genAsk, checkMark, animateProgress } from './helpers/script.js';
+import {
+  genCreateRepository,
+  genHasRepo,
+  genRemoveRepository,
+} from './repository.js';
 
 // const ORIGIN_REGEX = /proyectoramirez\/server-boilerplate\.git/;
 
-process.stdin.resume();
-process.stdin.setEncoding('utf8');
+const genMaybeClearRepositoryProcedure = async () => {
+  const hasRepo = await genHasRepo();
 
-process.stdout.write('\n');
-let interval;
-let clearRepo = true;
-
-cleanRepo(() => {
-  process.stdout.write(
-    '\nInstalling dependencies... (This might take a while)'
-  );
-  setTimeout(() => {
-    readline.cursorTo(process.stdout, 0);
-    interval = animateProgress('Installing dependencies');
-  }, 500);
-
-  installDeps();
-});
-
-/**
- * Deletes the .git folder in dir only if cloned from our repo
- */
-function cleanRepo(callback) {
-  fs.access('.git/', fs.constants.F_OK, (error) => {
-    if (error) {
-      callback();
-      
-return;
-    }
-
-    process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
-    process.stdin.resume();
-    process.stdin.on('data', (pData) => {
-      const value = pData.toString().trim();
-      if (value === 'y' || value === 'Y' || value === '') {
-        process.stdout.write('Removing old repository');
-        shell.rm('-rf', '.git/');
-        addCheckMark(callback);
-      } else {
-        dontClearRepo('', callback);
-      }
-    });
-  });
-}
-
-/**
- * Function which indicates that we are not cleaning git repo
- */
-function dontClearRepo(nl, callback) {
-  clearRepo = false;
-  process.stdout.write(`${nl} Leaving your repository untouched`);
-  addCheckMark(callback);
-}
-
-/**
- * Initializes git again
- */
-function initGit(callback) {
-  exec(
-    'git init && git add . && git commit -m "Initial commit"',
-    addCheckMark.bind(null, callback)
-  );
-}
-
-/**
- * Deletes the current directory
- */
-function deleteCurrentDir(callback) {
-  shell.rm('-rf', __dirname);
-  callback();
-}
-
-/**
- * Installs dependencies
- *
- * NOTE: Could be refactored with aync/await and:
- * const exec = util.promisify(require('child_process').exec);
- *
- */
-function installDeps() {
-  exec('node --version', (error, stdout) => {
-    const nodeVersion = stdout.trim();
-    if (error || compareVersions(nodeVersion, '8.10.0') === -1) {
-      installDepsCallback(
-        error ||
-          `[ERROR] You need Node.js v8.10 or above but you have ${nodeVersion}`
-      );
-    } else {
-      exec('npm --version', (error2, stdout2) => {
-        const npmVersion = stdout2.trim();
-        if (error2 || compareVersions(npmVersion, '5.0.0') === -1) {
-          installDepsCallback(
-            error2 ||
-              `[ERROR] You need npm v5 or above but you have v${npmVersion}`
-          );
-        } else {
-          exec('npm install', addCheckMark.bind(null, installDepsCallback));
-        }
-      });
-    }
-  });
-}
-
-/**
- * Callback function after installing dependencies
- */
-function installDepsCallback(error) {
-  clearInterval(interval);
-  process.stdout.write('\n\n');
-  if (error) {
-    process.stderr.write(error);
-    process.stdout.write('\n');
-    process.exit(1);
+  if (!hasRepo) {
+    return false;
   }
 
-  deleteCurrentDir(() => {
-    if (clearRepo) {
-      interval = animateProgress('Initialising new repository');
-      process.stdout.write('Initialising new repository');
-      initGit(() => {
-        clearInterval(interval);
-        endProcess();
-      });
-    }
+  const shouldClearRepo = await genAsk('Do you want to clear old repository?');
 
-    endProcess();
-  });
+  if (!shouldClearRepo) {
+    checkMark('Leaving your repository untouched\n\n');
+
+    return false;
+  }
+
+  const interval = animateProgress('Removing old repository');
+
+  await genRemoveRepository();
+
+  clearInterval(interval);
+  process.stdout.write('\n');
+  checkMark('Removed old repository\n\n');
+
+  return true;
+};
+
+const genInstallDependenciesProcedure = async () => {
+  const interval = animateProgress(
+    'Installing dependencies (This might take a while)'
+  );
+
+  try {
+    await genInstallDependencies();
+  } finally {
+    clearInterval(interval);
+  }
+
+  process.stdout.write('\n');
+  checkMark('Dependencies installed\n\n');
+};
+
+const genCreateRepositoryProcedure = async () => {
+  const interval = animateProgress('Initialising new repository');
+
+  await genCreateRepository();
+
+  clearInterval(interval);
+  process.stdout.write('\n');
+  checkMark('New repository initialized\n\n');
+};
+
+const genCleanupProcedure = async () => {
+  const interval = animateProgress('Removing setup files');
+
+  await genRemoveSetupFolder();
+
+  clearInterval(interval);
+  process.stdout.write('\n');
+  checkMark('Setup files removed\n\n');
+};
+
+process.stdin.setEncoding('utf8');
+
+const wasRepositoryRemoved = await genMaybeClearRepositoryProcedure();
+
+await genInstallDependenciesProcedure();
+
+if (wasRepositoryRemoved) {
+  await genCreateRepositoryProcedure();
 }
 
-/**
- * Function which ends setup process
- */
-function endProcess() {
-  process.stdout.write('\nDone!');
-  process.exit(0);
-}
+await genCleanupProcedure();
+
+process.stdout.write('Done!');
