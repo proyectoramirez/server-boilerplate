@@ -1,7 +1,6 @@
-import { exec } from 'child_process';
 import compareVersions from 'compare-versions';
 import process from 'node:process';
-import { promisify } from 'node:util';
+import { genExec } from './helpers/genExec.js';
 
 const MINIMUM_NODE_VERSION = '8.10.0';
 const MINIMUM_NPM_VERSION = '5.0.0';
@@ -9,8 +8,6 @@ const NPM_VERSION_COMMAND = 'npm --version';
 
 const isVersionLower = (currentVersion, referenceVersion) =>
   compareVersions.compare(currentVersion, referenceVersion, '<');
-
-const genExec = promisify(exec);
 
 const assertValidNodeVersion = () => {
   const nodeVersion = process.version;
@@ -37,7 +34,7 @@ const genAssertValidToolsVersion = async () => {
   await genAssertValidNpmVersion();
 };
 
-export const installDependencies = async () => {
+export const genInstallDependencies = async () => {
   await genAssertValidToolsVersion();
   await genExec('npm install');
 };
