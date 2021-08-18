@@ -12,5 +12,8 @@
     "./rules/imports.jsonc",
     "./rules/promises.jsonc",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "unicorn/prefer-top-level-await": "warn"
+  }
 }
