@@ -11,7 +11,6 @@
     ],
     "arrow-body-style": ["error", "as-needed"],
     "curly": ["error", "all"],
-    "filenames/no-index": "error",
-    "unicorn/import-index": ["error", { "ignoreImports": true }]
+    "filenames/no-index": "error"
   }
 }
