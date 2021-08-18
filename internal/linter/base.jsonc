@@ -9,8 +9,8 @@
     "canonical",
     "canonical/node",
     "plugin:unicorn/recommended",
+    "plugin:promise/recommended",
     "./rules/imports.jsonc",
-    "./rules/promises.jsonc",
     "prettier"
   ],
   "rules": {
