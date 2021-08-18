@@ -3,7 +3,12 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["canonical", "canonical/node", "prettier"],
+  "extends": [
+    "canonical",
+    "canonical/node",
+    "./internal/linter-rules/imports.json",
+    "prettier"
+  ],
   "parserOptions": {
     "sourceType": "module"
   },
