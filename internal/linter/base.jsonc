@@ -10,6 +10,7 @@
     "canonical/node",
     "plugin:unicorn/recommended",
     "./rules/imports.jsonc",
-    "./rules/promises.jsonc"
+    "./rules/promises.jsonc",
+    "prettier"
   ]
 }

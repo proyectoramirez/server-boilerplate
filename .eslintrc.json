@@ -2,7 +2,7 @@
   "env": {
     "node": true
   },
-  "extends": ["./internal/linter/base.jsonc", "prettier"],
+  "extends": ["./internal/linter/base.jsonc"],
   "rules": {
     "quotes": [
       "error",
