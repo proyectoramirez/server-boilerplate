@@ -5,5 +5,10 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": ["canonical", "canonical/node", "./rules/imports.jsonc"]
+  "extends": [
+    "canonical",
+    "canonical/node",
+    "./rules/imports.jsonc",
+    "./rules/promises.jsonc"
+  ]
 }
