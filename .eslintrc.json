@@ -1,17 +1,13 @@
 {
   "env": {
-    "es2021": true,
     "node": true
   },
   "extends": [
     "canonical",
     "canonical/node",
-    "./internal/linter-rules/imports.json",
+    "./internal/linter/base.jsonc",
     "prettier"
   ],
-  "parserOptions": {
-    "sourceType": "module"
-  },
   "rules": {
     "quotes": [
       "error",
