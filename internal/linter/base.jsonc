@@ -5,5 +5,5 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": ["./rules/imports.json"]
+  "extends": ["./rules/imports.jsonc"]
 }
