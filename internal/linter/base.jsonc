@@ -8,6 +8,7 @@
   "extends": [
     "canonical",
     "canonical/node",
+    "plugin:unicorn/recommended",
     "./rules/imports.jsonc",
     "./rules/promises.jsonc"
   ]
