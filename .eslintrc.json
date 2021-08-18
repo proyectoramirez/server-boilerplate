@@ -2,12 +2,7 @@
   "env": {
     "node": true
   },
-  "extends": [
-    "canonical",
-    "canonical/node",
-    "./internal/linter/base.jsonc",
-    "prettier"
-  ],
+  "extends": ["./internal/linter/base.jsonc", "prettier"],
   "rules": {
     "quotes": [
       "error",
@@ -16,7 +11,6 @@
     ],
     "arrow-body-style": ["error", "as-needed"],
     "curly": ["error", "all"],
-    "import/extensions": ["error", "always"],
     "filenames/no-index": "error",
     "unicorn/import-index": ["error", { "ignoreImports": true }]
   }
