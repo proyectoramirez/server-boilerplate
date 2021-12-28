@@ -1,18 +1,195 @@
 {
-  "env": {
-    "es2021": true
-  },
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "extends": [
-    "canonical",
-    "canonical/node",
-    "plugin:unicorn/recommended",
-    "./rules/imports.jsonc",
-    "prettier"
-  ],
-  "rules": {
-    "unicorn/prefer-top-level-await": "warn"
-  }
+	"env": {
+		"es2021": true
+	},
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"extends": [
+		"eslint:recommended",
+		"canonical",
+		"canonical/node",
+		"plugin:unicorn/recommended",
+		"plugin:promise/recommended",
+		"./rules/imports.jsonc",
+		"prettier"
+	],
+	"rules": {
+		"filenames/no-index": "error",
+		"unicorn/prefer-top-level-await": "warn",
+		"no-await-in-loop": "error",
+		"no-console": "error",
+		"no-loss-of-precision": "error",
+		"no-promise-executor-return": "warn",
+		"no-template-curly-in-string": "warn",
+		"no-unreachable-loop": "warn",
+		"no-unsafe-optional-chaining": "error",
+		"require-atomic-updates": "warn",
+
+		// Best practices
+		"accessor-pairs": "error",
+		"array-callback-return": "error",
+		"block-scoped-var": "warn",
+		"class-methods-use-this": "warn",
+		"complexity": "warn",
+		"consistent-return": "error",
+		"default-case": "error",
+		"default-case-last": "error",
+		"default-param-last": "error",
+		"dot-notation": "error",
+		"eqeqeq": "error",
+		"grouped-accessor-pairs": "error",
+		"no-extend-native": "error",
+		"guard-for-in": "off", // Since no-extend-native prevents this
+		"no-alert": "error",
+		"no-caller": "error",
+		"no-constructor-return": "error",
+		"no-div-regex": "error",
+		"no-else-return": "error",
+		"no-empty-function": "error",
+		"no-eq-null": "off", // Since null is forbidden
+		"no-eval": "error",
+		"no-extra-bind": "error",
+		"no-implicit-coercion": "error",
+		"no-implicit-globals": "off", // For now, since it might be unnecessary
+		"no-implied-eval": "error",
+		"no-invalid-this": "error",
+		"no-iterator": "error",
+		"no-labels": "error",
+		"no-extra-label": "error",
+		"no-lone-blocks": "error",
+		"no-loop-func": "error",
+		"no-magic-numbers": ["error", { "ignore": [0, 1, -1] }],
+		"no-new": "error",
+		"no-new-func": "error",
+		"no-new-wrappers": "off", // Because unicorn already does this
+		"no-nonoctal-decimal-escape": "error",
+		"no-octal-escape": "error",
+		"no-proto": "error",
+		"no-param-reassign": "error",
+		"no-restricted-properties": "off", // For now, since there are no restricted properties
+		"no-return-assign": "error",
+		"no-return-await": "warn",
+		"no-script-url": "error",
+		"no-self-compare": "error",
+		"no-sequences": "error",
+		"no-throw-literal": "error",
+		"no-unmodified-loop-condition": "warn",
+		"no-useless-call": "error",
+		"no-useless-concat": "error",
+		"no-void": "error",
+		"no-warning-comments": "error",
+		"prefer-named-capture-group": "error",
+		"prefer-promise-reject-errors": "error",
+		"prefer-regex-literals": "error",
+		"radix": ["error", "as-needed"],
+		"require-await": "error",
+		"require-unicode-regexp": "error",
+		"vars-on-top": "off", // Because vars are forbidden
+		"wrap-iife": "error",
+		"yoda": "error",
+
+		"strict": "error",
+
+		// Variable stuff
+		"init-declarations": "off", // For now, since it might be unnecessary
+		"no-label-var": "off", // Since labels are disabled
+		"no-restricted-globals": "off", // For now, since no globals are restricted
+		"no-shadow": "warn",
+		"no-undef-init": "error",
+		"no-use-before-define": "error",
+
+		"camelcase": "error",
+		"capitalized-comments": "off", // Because code sometimes is commented
+		"consistent-this": "error",
+		"func-name-matching": "off", // For now, because it might be noisy
+		"func-names": ["error", "as-needed"],
+		"func-style": ["error", "expression"],
+		"id-length": "warn",
+		"lines-between-class-members": "error",
+		"max-depth": "warn",
+		"max-params": "warn",
+		"new-cap": "error",
+		"no-array-constructor": "error",
+		"no-bitwise": "warn",
+		"no-continue": "warn",
+		"no-lonely-if": "error",
+		"no-multi-assign": "warn",
+		"no-negated-condition": "error",
+		"no-nested-ternary": "warn",
+		"no-new-object": "error",
+		"no-plusplus": "off",
+		"no-restricted-syntax": [
+			"error",
+			{
+				"selector": "FunctionDeclaration[async=false][id.name=/^gen/]",
+				"message": "Function starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "FunctionDeclaration[async=true][id.name!=/^gen/]",
+				"message": "Async function name must start with 'gen'"
+			},
+			{
+				"selector": "MethodDefinition[value.async=false][key.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "MethodDefinition[value.async=true][key.name!=/^gen/]",
+				"message": "Async method name must end in 'gen'"
+			},
+			{
+				"selector": "Property[value.type=/FunctionExpression$/][value.async=false][key.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "Property[value.type=/FunctionExpression$/][value.async=true][key.name!=/^gen/]",
+				"message": "Async method name must end in 'gen'"
+			},
+			{
+				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=false][id.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=true][id.name!=/^gen/]",
+				"message": "Async method name must end in 'gen'"
+			}
+		],
+		"no-underscore-dangle": "error",
+		"no-unneeded-ternary": "warn",
+		"one-var": ["error", "never"],
+		"operator-assignment": "warn",
+		"prefer-exponentiation-operator": "error",
+		"prefer-object-spread": "error",
+		"quote-props": ["error", "as-needed"],
+		"quotes": [
+			"error",
+			"single",
+			{ "avoidEscape": true, "allowTemplateLiterals": false }
+		],
+		"spaced-comment": "error",
+		"arrow-body-style": "error",
+		"no-useless-computed-key": "error",
+		"no-useless-constructor": "error",
+		"no-useless-rename": "error",
+		"no-var": "error",
+		"object-shorthand": "error",
+		"prefer-arrow-callback": "error",
+		"prefer-const": "error",
+		"prefer-destructuring": [
+			"error",
+			{
+				"array": false,
+				"object": true
+			},
+			{
+				"enforceForRenamedProperties": false
+			}
+		],
+		"prefer-numeric-literals": "error",
+		"prefer-rest-params": "error",
+		"prefer-spread": "error",
+		"prefer-template": "error",
+		"symbol-description": "error",
+		"curly": ["error", "all"]
+	}
 }

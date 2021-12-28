@@ -1,16 +1,6 @@
 {
-  "env": {
-    "node": true
-  },
-  "extends": ["./internal/linter/base.jsonc"],
-  "rules": {
-    "quotes": [
-      "error",
-      "single",
-      { "avoidEscape": true, "allowTemplateLiterals": false }
-    ],
-    "arrow-body-style": ["error", "as-needed"],
-    "curly": ["error", "all"],
-    "filenames/no-index": "error"
-  }
+	"env": {
+		"node": true
+	},
+	"extends": ["./internal/linter/base.jsonc"]
 }
