@@ -11,11 +11,11 @@
 		"canonical/node",
 		"plugin:unicorn/recommended",
 		"plugin:promise/recommended",
+		"./rules/naming-conventions.jsonc",
 		"./rules/imports.jsonc",
 		"prettier"
 	],
 	"rules": {
-		"filenames/no-index": "error",
 		"unicorn/prefer-top-level-await": "warn",
 		"no-await-in-loop": "error",
 		"no-console": "error",
@@ -98,18 +98,16 @@
 		"no-shadow": "warn",
 		"no-undef-init": "error",
 		"no-use-before-define": "error",
-
-		"camelcase": "error",
-		"capitalized-comments": "off", // Because code sometimes is commented
 		"consistent-this": "error",
-		"func-name-matching": "off", // For now, because it might be noisy
+
+		"capitalized-comments": "off", // Because code sometimes is commented
+		"func-name-matching": "warn", // For now, because it might be noisy
 		"func-names": ["error", "as-needed"],
 		"func-style": ["error", "expression"],
 		"id-length": "warn",
 		"lines-between-class-members": "error",
 		"max-depth": "warn",
 		"max-params": "warn",
-		"new-cap": "error",
 		"no-array-constructor": "error",
 		"no-bitwise": "warn",
 		"no-continue": "warn",
@@ -119,42 +117,7 @@
 		"no-nested-ternary": "warn",
 		"no-new-object": "error",
 		"no-plusplus": "off",
-		"no-restricted-syntax": [
-			"error",
-			{
-				"selector": "FunctionDeclaration[async=false][id.name=/^gen/]",
-				"message": "Function starting with 'gen' must be declared async"
-			},
-			{
-				"selector": "FunctionDeclaration[async=true][id.name!=/^gen/]",
-				"message": "Async function name must start with 'gen'"
-			},
-			{
-				"selector": "MethodDefinition[value.async=false][key.name=/^gen/]",
-				"message": "Method starting with 'gen' must be declared async"
-			},
-			{
-				"selector": "MethodDefinition[value.async=true][key.name!=/^gen/]",
-				"message": "Async method name must end in 'gen'"
-			},
-			{
-				"selector": "Property[value.type=/FunctionExpression$/][value.async=false][key.name=/^gen/]",
-				"message": "Method starting with 'gen' must be declared async"
-			},
-			{
-				"selector": "Property[value.type=/FunctionExpression$/][value.async=true][key.name!=/^gen/]",
-				"message": "Async method name must end in 'gen'"
-			},
-			{
-				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=false][id.name=/^gen/]",
-				"message": "Method starting with 'gen' must be declared async"
-			},
-			{
-				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=true][id.name!=/^gen/]",
-				"message": "Async method name must end in 'gen'"
-			}
-		],
-		"no-underscore-dangle": "error",
+
 		"no-unneeded-ternary": "warn",
 		"one-var": ["error", "never"],
 		"operator-assignment": "warn",
@@ -190,6 +153,7 @@
 		"prefer-spread": "error",
 		"prefer-template": "error",
 		"symbol-description": "error",
-		"curly": ["error", "all"]
+		"curly": ["error", "all"],
+		"promise/prefer-await-to-callbacks": "off"
 	}
 }

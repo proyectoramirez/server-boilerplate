@@ -1,5 +1,5 @@
 import loadPathsIntoRouter from '../../utils/loadPathsIntoRouter.js';
 
-const routes = [];
+const routeList = [];
 
-export default loadPathsIntoRouter(routes);
+export const routes = loadPathsIntoRouter(routeList);

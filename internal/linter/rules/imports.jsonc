@@ -1,71 +1,77 @@
 {
-  "plugins": ["import"],
-  "rules": {
-    // Ensure basic import and export functionality
-    "import/no-unresolved": "error",
-    "import/named": "error",
-    "import/default": "error",
-    "import/namespace": "error",
-    "import/export": "error",
-    "import/no-self-import": "error",
+	"plugins": ["import"],
+	"rules": {
+		// Ensure basic import and export functionality
+		"import/no-unresolved": "error",
+		"import/named": "error",
+		"import/namespace": "error",
+		"import/default": "error",
+		"import/export": "error",
 
-    // Configure valid import paths
-    "import/no-absolute-path": "error",
-    "import/no-useless-path-segments": "error",
-    "import/no-relative-parent-imports": "warn",
-    "import/no-relative-packages": "off",
+		// No suspicious imports
+		"import/no-self-import": "error",
+		"import/no-cycle": "error",
+		"import/no-duplicates": "off", // Because the ESLint core version (no-duplicate-imports) is good enough https://github.com/import-js/eslint-plugin-import/blob/master/docs/rules/no-duplicates.md#when-not-to-use-it
+		"no-duplicate-imports": "error",
 
-    // Configure valid imports
-    "import/no-extraneous-dependencies": "error", // For now, since I need to determine where each dependency type is needed
-    "import/no-deprecated": "warn",
+		// Configure valid import paths
+		"import/no-absolute-path": "error",
+		"import/no-useless-path-segments": "error",
+		"import/no-relative-parent-imports": "off",
+		"import/no-relative-packages": "off",
 
-    // General arbitrary rules
-    "no-duplicate-imports": "error",
-    "import/no-duplicates": "off", // Because the ESLint core version (no-duplicate-imports) is good enough https://github.com/import-js/eslint-plugin-import/blob/master/docs/rules/no-duplicates.md#when-not-to-use-it
-    "import/extensions": ["error", "ignorePackages"],
-    "import/no-mutable-exports": "error",
-    "import/no-named-default": "error",
-    "import/max-dependencies": "warn", // For now, since I need to determine how useful this rule really is
-    "import/unambiguous": "warn",
-    "import/no-namespace": "warn", // For now, since it might be too noisy
-    "import/no-unassigned-import": "warn",
-    "import/no-unused-modules": [
-      "warn",
-      { "missingExports": true, "unusedExports": true }
-    ],
-    "import/group-exports": "off", // For now, since it might be unnecessary
-    "import/no-cycle": "off",
+		// Configure valid imports
+		"import/no-extraneous-dependencies": "error", // For now, since I need to determine where each dependency type is needed
+		"import/no-deprecated": "error",
 
-    // Disable non-ES6 imports
-    "import/no-commonjs": ["error", { "allowConditionalRequire": false }],
-    "import/no-amd": "error",
-    "no-import-module-exports": "off", // Because CommonJS is disabled
-    "import/no-dynamic-require": "off",
+		// Always include extensions
+		"import/extensions": ["error", "ignorePackages"],
 
-    // Disable default exports
-    "import/no-default-export": "error",
-    "import/no-named-export": "off",
-    "import/prefer-default-export": "off",
-    "import/no-anonymous-default-export": "off",
-    "import/no-named-as-default": "off",
-    "import/no-named-as-default-member": "off",
+		// Disable non-ES6 imports
+		"import/no-commonjs": ["error", { "allowConditionalRequire": false }],
+		"import/no-amd": "error",
+		"no-import-module-exports": "off", // Because CommonJS is disabled
+		"import/no-dynamic-require": "off",
 
-    // Organize imports and exports
-    "import/first": "error",
-    "import/exports-last": "off", // For now, since it might be too noisy
-    "import/newline-after-import": "warn",
-    "import/order": [
-      "warn",
-      {
-        "newlines-between": "always"
-      }
-    ],
+		// Disable default exports
+		"import/no-default-export": "error",
+		"import/no-named-export": "off",
+		"import/no-named-default": "off",
+		"import/prefer-default-export": "off",
+		"import/no-anonymous-default-export": "off",
+		"import/no-named-as-default": "off",
+		"import/no-named-as-default-member": "off",
 
-    // Rules to be overriden
-    "import/no-restricted-paths": "off",
-    "import/no-nodejs-modules": "off",
-    "import/no-webpack-loader-syntax": "off",
-    "dynamic-import-chunkname": "off", // For now, since webpack is not used here
-    "import/no-internal-modules": "off"
-  }
+		// Warn about namespace imports
+		"import/no-namespace": "warn", // For now, since it might be too noisy
+
+		// General arbitrary rules
+		"import/no-mutable-exports": "error",
+		"import/max-dependencies": "warn", // For now, since I need to determine how useful this rule really is
+		"import/unambiguous": "warn",
+		"import/no-unassigned-import": "warn",
+		"import/no-unused-modules": [
+			"warn",
+			{ "missingExports": false, "unusedExports": true }
+		],
+		"import/group-exports": "off", // For now, since it might be unnecessary
+
+		// Organize imports and exports
+		"import/first": "error",
+		"import/exports-last": "error",
+		"import/newline-after-import": "warn",
+		"import/order": [
+			"warn",
+			{
+				"newlines-between": "always"
+			}
+		],
+
+		// Rules to be overriden
+		"import/no-restricted-paths": "off",
+		"import/no-webpack-loader-syntax": "off",
+		"dynamic-import-chunkname": "off", // For now, since webpack is not used here
+		"import/no-nodejs-modules": "off",
+		"import/no-internal-modules": "off"
+	}
 }

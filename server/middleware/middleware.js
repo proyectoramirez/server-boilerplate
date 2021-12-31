@@ -1,12 +1,14 @@
 import express from 'express';
+
 import { isDev as isDevelopment } from '../utils/env.js';
-import commonMiddleware from './middleware.js';
+
+import { middlewareBase } from './middleware-base.js';
 
 const specificMiddleware = await import(
-  isDevelopment ? './middleware.development.js' : './middleware.production.js'
+	isDevelopment ? './middleware-development.js' : './middleware-production.js'
 );
 
-const router = express.Router();
-router.use(commonMiddleware, specificMiddleware.default);
+const middleware = express.Router();
+middleware.use(middlewareBase, specificMiddleware.default);
 
-export default router;
+export { middleware };

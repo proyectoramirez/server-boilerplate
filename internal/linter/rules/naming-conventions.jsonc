@@ -1,0 +1,51 @@
+{
+	"plugins": ["filenames"],
+	"rules": {
+		"camelcase": "error", // camelCase or UPPER_CASE for variables
+		"new-cap": "error", // Uppercase first letter for constructors
+		"no-underscore-dangle": "error", // No _ for variables
+
+		"unicorn/filename-case": "error", // kebab-case for files
+		"filenames/match-regex": "off", // Redundant with unicorn/filename-case
+		"filenames/no-index": "error", // Disallow files named index
+
+		"filenames/match-exported": "off", // Since default exports are not enabled
+
+		// Force async functions to be named gen
+		"no-restricted-syntax": [
+			"error",
+			{
+				"selector": "FunctionDeclaration[async=false][id.name=/^gen/]",
+				"message": "Function starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "FunctionDeclaration[async=true][id.name!=/^gen/]",
+				"message": "Async function name must start with 'gen'"
+			},
+			{
+				"selector": "MethodDefinition[value.async=false][key.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "MethodDefinition[value.async=true][key.name!=/^gen/]",
+				"message": "Async method name must start in 'gen'"
+			},
+			{
+				"selector": "Property[value.type=/FunctionExpression$/][value.async=false][key.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "Property[value.type=/FunctionExpression$/][value.async=true][key.name!=/^gen/]",
+				"message": "Async method name must start in 'gen'"
+			},
+			{
+				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=false][id.name=/^gen/]",
+				"message": "Method starting with 'gen' must be declared async"
+			},
+			{
+				"selector": "VariableDeclarator[init.type=/FunctionExpression$/][init.async=true][id.name!=/^gen/]",
+				"message": "Async method name must start in 'gen'"
+			}
+		]
+	}
+}

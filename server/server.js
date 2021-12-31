@@ -1,28 +1,28 @@
 import express from 'express';
-import config from './config/index.js';
-import setupDB from './database/index.js';
-import middleware from './middleware/index.js';
-import routing from './routing/index.js';
+
+import { config } from './config/config.js';
+import { setupDatabase } from './database/setup.js';
+import { middleware } from './middleware/middleware.js';
+import { routes } from './routing/routes.js';
 import logger from './utils/logger.js';
 
 const app = express();
+const startServer = () => {
+	const { host, port } = config;
+
+	// Start your app.
+	app.listen(port, host, (error) => {
+		if (error) {
+			logger.error(error);
+		} else {
+			logger.appStarted(port, host);
+		}
+	});
+};
 
 app.use(middleware);
-app.use(routing);
+app.use(routes);
 
-setupDB()
-  .catch(() => {})
-  .finally(startServer);
+await setupDatabase();
 
-function startServer() {
-  const { host } = config;
-  const { port } = config;
-
-  // Start your app.
-  app.listen(port, host, (error) => {
-    if (error) {
-      return logger.error(error);
-    }
-    logger.appStarted(port, host);
-  });
-}
+startServer();
