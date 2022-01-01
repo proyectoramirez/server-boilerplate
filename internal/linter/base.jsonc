@@ -97,7 +97,10 @@
 		"no-restricted-globals": "off", // For now, since no globals are restricted
 		"no-shadow": "warn",
 		"no-undef-init": "error",
-		"no-use-before-define": "error",
+		"no-use-before-define": [
+			"error",
+			{ "functions": true, "classes": true, "variables": false }
+		],
 		"consistent-this": "error",
 
 		"capitalized-comments": "off", // Because code sometimes is commented
