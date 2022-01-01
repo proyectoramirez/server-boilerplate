@@ -5,7 +5,7 @@ import { env } from 'node:process';
 import deepFreeze from 'deep-freeze';
 
 import argv from '../utils/argv.js';
-import { envName as environmentName } from '../utils/env.js';
+import { environmentName } from '../utils/environment.js';
 import requireOrDefault from '../utils/requireOrDefault.js';
 
 import base from './config-base.js';
