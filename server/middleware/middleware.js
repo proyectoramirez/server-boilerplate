@@ -1,14 +1,16 @@
 import express from 'express';
 
-import { isDev as isDevelopment } from '../utils/env.js';
+import { environmentName } from '../utils/environment.js';
 
-import { middlewareBase } from './middleware-base.js';
+import {
+	commonMiddleware,
+	environmentSpecificMiddlewares,
+} from './middleware-list.js';
 
-const specificMiddleware = await import(
-	isDevelopment ? './middleware-development.js' : './middleware-production.js'
-);
+const environmentSpecificMiddleware =
+	environmentSpecificMiddlewares[environmentName] ?? [];
 
 const middleware = express.Router();
-middleware.use(middlewareBase, specificMiddleware.middleware);
+middleware.use(commonMiddleware, environmentSpecificMiddleware);
 
 export { middleware };
