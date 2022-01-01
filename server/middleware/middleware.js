@@ -9,6 +9,6 @@ const specificMiddleware = await import(
 );
 
 const middleware = express.Router();
-middleware.use(middlewareBase, specificMiddleware.default);
+middleware.use(middlewareBase, specificMiddleware.middleware);
 
 export { middleware };
