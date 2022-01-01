@@ -1,22 +1,11 @@
 import mongoose from 'mongoose';
 
-import config from '../config/index.js';
-import logger from '../utils/logger.js';
+import { config } from '../config/config.js';
 
-export const setupDatabase = () => {
-	return mongoose
-		.connect(config.connectionStrings.db, { useNewUrlParser: true })
-		.then(() => {
-			console.log();
-			logger.timestamp();
-			logger.info();
-		})
-		.catch((error) => {
-			console.log();
-			logger.timestamp();
-			logger.error(`${error}\n`);
-			throw error;
-		});
+export const genSetupInitialDatabaseConnection = async () => {
+	await mongoose.connect(config.connectionStrings.db, {
+		useNewUrlParser: true,
+	});
 };
 
 // Mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
