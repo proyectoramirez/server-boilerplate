@@ -1,29 +1,29 @@
 import { isDevelopment } from '../../utils/environment.js';
-import logger from '../../utils/logger.js';
+import {
+	info as logInfo,
+	error as logError,
+	timestamp as logTimestamp,
+} from '../../utils/logger.js';
 
 const logRequest = (request) => {
-	logger.info(`${request.method} to ${request.originalUrl} by ${request.ip}`);
+	logInfo(`${request.method} to ${request.originalUrl} by ${request.ip}`);
 };
 
 const logResponse = (response) => {
 	if (response.finished) {
-		logger.info(
+		logInfo(
 			`${response.statusCode} ${response.statusMessage}, ${
 				response.get('Content-Length') || 0
 			}b sent`
 		);
 	} else {
-		logger.info('Aborted by the client.');
-		logger.info(
+		logInfo('Aborted by the client.');
+		logInfo(
 			`Had status ${response.statusCode} ${response.statusMessage}, ${
 				response.get('Content-Length') || 0
 			}b`
 		);
 	}
-};
-
-const logError = (error) => {
-	logger.error(error);
 };
 
 export const httpLogger = (callback) => {
@@ -57,7 +57,7 @@ export const httpLogger = (callback) => {
 		};
 
 		if (isDevelopment) {
-			logger.timestamp();
+			logTimestamp();
 			logRequest(request);
 			response.on('finish', log);
 			response.on('close', log);

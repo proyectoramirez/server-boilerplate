@@ -1,7 +1,11 @@
 import { config } from './config/config.js';
 import { genSetupInitialDatabaseConnection } from './database/setup.js';
 import { server } from './server.js';
-import logger from './utils/logger.js';
+import {
+	timestamp as logTimestamp,
+	appStarted as logAppStarted,
+	error as logError,
+} from './utils/logger.js';
 
 const { host, port } = config;
 
@@ -22,9 +26,9 @@ try {
 	await genSetupInitialDatabaseConnection();
 	await genStartServer();
 
-	logger.timestamp();
-	logger.appStarted(port, host);
+	logTimestamp();
+	logAppStarted(port, host);
 } catch (error) {
-	logger.timestamp();
-	logger.error(error);
+	logTimestamp();
+	logError(error);
 }
