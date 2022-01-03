@@ -9,7 +9,6 @@
 		"eslint:recommended",
 		"canonical",
 		"canonical/node",
-		"plugin:unicorn/recommended",
 		"plugin:promise/recommended",
 		"./rules/naming-conventions.jsonc",
 		"./rules/imports.jsonc",
