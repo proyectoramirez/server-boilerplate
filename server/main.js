@@ -19,7 +19,7 @@ const genStartServer = () => {
 };
 
 try {
-	// await genSetupInitialDatabaseConnection();
+	await genSetupInitialDatabaseConnection();
 	await genStartServer();
 
 	logger.timestamp();

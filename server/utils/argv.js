@@ -1,3 +1,5 @@
 import minimist from 'minimist';
 
-export default minimist(process.argv.slice(2));
+const ARGUMENTS_TO_SKIP = 2;
+
+export const argv = minimist(process.argv.slice(ARGUMENTS_TO_SKIP));
