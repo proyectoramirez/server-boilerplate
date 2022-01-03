@@ -1,4 +1,4 @@
-import loadPathsIntoRouter from '../../utils/loadPathsIntoRouter.js';
+import loadPathsIntoRouter from '../../utils/load-paths-into-router.js';
 
 const routeList = [];
 
