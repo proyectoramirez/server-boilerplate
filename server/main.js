@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unused-modules */
 import { config } from './config/config.js';
 import { genSetupInitialDatabaseConnection } from './database/setup.js';
 import { server } from './server.js';

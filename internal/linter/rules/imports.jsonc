@@ -52,7 +52,7 @@
 		"import/no-unassigned-import": "warn",
 		"import/no-unused-modules": [
 			"warn",
-			{ "missingExports": false, "unusedExports": true }
+			{ "missingExports": true, "unusedExports": true }
 		],
 		"import/group-exports": "off", // For now, since it might be unnecessary
 
