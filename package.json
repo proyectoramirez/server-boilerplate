@@ -8,10 +8,11 @@
   },
   "type": "module",
   "author": "Jose Ramirez",
+  "main": "server/main.js",
   "scripts": {
     "presetup": "npm i chalk shelljs",
     "setup": "node ./internal/setup/setup.js",
-    "start": "cross-env NODE_ENV=development node server/main.js",
+    "start": "cross-env NODE_ENV=development nodemon",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server/main.js"
   },
