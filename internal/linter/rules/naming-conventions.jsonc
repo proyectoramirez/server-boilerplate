@@ -1,15 +1,15 @@
 {
-	"plugins": ["filenames"],
+	"plugins": ["canonical"],
 	"rules": {
 		"camelcase": "error", // camelCase or UPPER_CASE for variables
 		"new-cap": "error", // Uppercase first letter for constructors
 		"no-underscore-dangle": "error", // No _ for variables
 
 		"unicorn/filename-case": "error", // kebab-case for files
-		"filenames/match-regex": "off", // Redundant with unicorn/filename-case
-		"filenames/no-index": "error", // Disallow files named index
+		"canonical/filename-match-regex": "off", // Redundant with unicorn/filename-case
+		"canonical/filename-no-index": "error", // Disallow files named index
 
-		"filenames/match-exported": "off", // Since default exports are not enabled
+		"canonical/filename-match-exported": "off", // Since default exports are not enabled
 
 		// Force async functions to be named gen
 		"no-restricted-syntax": [
