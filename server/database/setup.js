@@ -5,6 +5,7 @@ import { config } from '../config/config.js';
 export const genSetupInitialDatabaseConnection = async () => {
 	await mongoose.connect(config.connectionStrings.db, {
 		useNewUrlParser: true,
+		useUnifiedTopology: true,
 	});
 };
 
