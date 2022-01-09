@@ -10,7 +10,7 @@ import {
 const environmentSpecificMiddleware =
 	environmentSpecificMiddlewares[environmentName] ?? [];
 
-const middleware = express.Router();
+const middleware = new express.Router();
 middleware.use(commonMiddleware, environmentSpecificMiddleware);
 
 export { middleware };
