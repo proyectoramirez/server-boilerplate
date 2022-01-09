@@ -21,9 +21,7 @@ try {
 	await genSetupInitialDatabaseConnection();
 	await genStartServer();
 
-	logger.timestamp();
 	logger.appStarted(port, host);
 } catch (error) {
-	logger.timestamp();
 	logger.error(error as string);
 }
