@@ -52,13 +52,13 @@
 		"import/no-unassigned-import": "warn",
 		"import/no-unused-modules": [
 			"warn",
-			{ "missingExports": true, "unusedExports": true }
+			{ "missingExports": true, "unusedExports": false /* Too noisy */ }
 		],
 		"import/group-exports": "off", // For now, since it might be unnecessary
 
 		// Organize imports and exports
 		"import/first": "error",
-		"import/exports-last": "error",
+		"import/exports-last": "off", // Too noisy
 		"import/newline-after-import": "warn",
 		"import/order": [
 			"warn",

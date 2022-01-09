@@ -1,0 +1,5 @@
+{
+	"rules": {
+		"@typescript-eslint/prefer-enum-initializers": "off"
+	}
+}

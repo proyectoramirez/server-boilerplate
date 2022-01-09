@@ -1,3 +1,5 @@
+import type { Request, RequestHandler, Response } from 'express';
+
 import { isDevelopment } from '../../utils/environment.js';
 import {
 	info as logInfo,
@@ -5,12 +7,12 @@ import {
 	timestamp as logTimestamp,
 } from '../../utils/logger.js';
 
-const logRequest = (request) => {
+const logRequest = (request: Request) => {
 	logInfo(`${request.method} to ${request.originalUrl} by ${request.ip}`);
 };
 
-const logResponse = (response) => {
-	if (response.finished) {
+const logResponse = (response: Response) => {
+	if (response.writableEnded) {
 		logInfo(
 			`${response.statusCode} ${response.statusMessage}, ${
 				response.get('Content-Length') || 0
@@ -26,7 +28,9 @@ const logResponse = (response) => {
 	}
 };
 
-export const httpLogger = (callback) => {
+type Callback = (request: Request, response: Response, error?: Error ) => void;
+
+export const httpLogger = (callback?: Callback): RequestHandler => {
 	return (request, response, next) => {
 		const cleanupCallback = () => {
 			response.off('finish', runCallback);
@@ -34,13 +38,13 @@ export const httpLogger = (callback) => {
 			response.off('error', runCallback);
 		};
 
-		const runCallback = (error) => {
+		const runCallback = (error?: Error) => {
 			cleanupCallback();
 
-			return callback(request, response, error);
+			callback(request, response, error);
 		};
 
-		const log = (error) => {
+		const log = (error?: Error) => {
 			if (error) {
 				logError(error);
 			} else {

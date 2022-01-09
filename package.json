@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "@types/express": "^4.17.13",
     "cross-env": "^7.0.3",
     "eslint": "^8.6.0",
     "eslint-config-canonical": "^33.0.0",

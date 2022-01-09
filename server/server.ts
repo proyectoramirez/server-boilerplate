@@ -6,6 +6,9 @@ import { routes } from './routing/routes.js';
 const server = express();
 
 server.use(middleware);
-server.use(routes);
+
+for (const [path, handler] of routes) {
+	server.use(path, handler);
+}
 
 export { server };

@@ -3,15 +3,18 @@
 		"es2021": true
 	},
 	"parserOptions": {
-		"sourceType": "module"
+		"sourceType": "module",
+		"project": "./server/tsconfig.json"
 	},
 	"extends": [
 		"eslint:recommended",
 		"canonical",
 		"canonical/node",
+		"canonical/typescript",
 		"plugin:promise/recommended",
 		"./rules/naming-conventions.jsonc",
 		"./rules/imports.jsonc",
+		"./rules/typescript/enums.jsonc",
 		"prettier"
 	],
 	"rules": {
