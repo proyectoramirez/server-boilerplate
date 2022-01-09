@@ -8,7 +8,7 @@ const DIVIDER_LENGTH = 15;
 const DIVIDER = gray('-'.repeat(DIVIDER_LENGTH));
 
 export const logger = {
-	appStarted(port: string, host: string) {
+	appStarted(port: number, host: string) {
 		const messageToLog = `Server started! ${green('✓')}
 		${bold('Access URLs:')}
 		${DIVIDER}

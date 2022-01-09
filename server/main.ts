@@ -1,10 +1,12 @@
 /* eslint-disable import/no-unused-modules */
-import { config } from './config/config.js';
+import config from 'config';
+
 import { genSetupInitialDatabaseConnection } from './database/setup.js';
 import { server } from './server.js';
 import { logger } from './utils/logger.js';
 
-const { host, port } = config;
+const host = config.get<string>('host');
+const port = config.get<number>('port');
 
 // eslint-disable-next-line no-restricted-syntax
 const genStartServer = () => {

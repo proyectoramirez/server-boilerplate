@@ -1,12 +1,10 @@
 import mongoose from 'mongoose';
+import config from 'config';
 
-import { config } from '../config/config.js';
+const connectionString = config.get<string>('database.connectionString');
 
 export const genSetupInitialDatabaseConnection = async () => {
-	await mongoose.connect(config.connectionStrings.db, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	});
+	await mongoose.connect(connectionString);
 };
 
 // Mongoose.connection.on("connecting", () => logger.info("Connecting to database..."));
